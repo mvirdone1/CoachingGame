@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>Coaching CYOA</title>
+</head>
+<body>
+<h2> Welcome to your coaching adventure </h2>
+<p> Read the text below and then chose your path </p>
+<hr>
+
+<!--<textarea rows="20" cols="80" id="textInput">The journey starts with you in your office, one of your teammates stops by and asks you for help solving a personal/professional challenge. You are currently very busy.</textarea></br>
+-->
+<p id="textInput">The journey starts with you in your office, one of your teammates stops by and asks you for help solving a personal/professional challenge. You are currently very busy.</p>
+
+<hr>
+<form>
+<table id="gameTable">
+<tr> 
+<td>1) Tell the employee exactly how to solve their problem </td>
+<td> <button id="topButton" onclick="nextStep('top')" type="button">Choose</button></td>
+</tr>
+
+<tr>
+<td>2) You see an opportuntity to help your teammate solve their own problem</td>
+<td><button id="bottomButton" onclick="nextStep('bottom')" type="button">Choose</button></td>
+</tr>
+
+</table>
+
+<!--<button id="topButton" onclick="nextStep('top')" type="button"></button>-->
+
+<input type="hidden" id="currentState" value="start">
+</form>
+
+<script>
+function nextStep(buttonID) {
+    var d = new Date();
+    var myTime = d.getTime();
+
+    state = document.getElementById("currentState").value
+    switch(state)
+    {
+        case "start":
+            if (buttonID == 'top')
+            {
+                
+                updateGame("You have been slayed by the advice monster, your coaching adventure has come to an end",
+                "Start Over", 
+                "Start Over", 
+                "endGame");
+            }
+            else
+            {
+                        
+                updateGame("You want to help the teammate solve their problem, but you can't clear your current tasks",
+                "You ask the employee if they can reschedule to a later time where you can give them all your focus", 
+                "You stay seated firmly behind your computer/keyboard, engaging in conversation while simultaneously keeping an eye on your emails", 
+                "nowOrLater");
+            }
+            break;
+        case "nowOrLater":
+            if (buttonID == 'top')
+            {
+                updateGame("After rescheduling to a later time, you can now give your teammate your undivided attention <br> <b>Later:</b> <br> Upon returning at the agreed upon time, you begin an engaged conversation with the employee",
+                "You ask the employee 'what's on your mind'",
+                "Based on your past experience with the employee, you list out a few topics for discussion",
+                "later");
+            }
+            else
+            {
+                updateGame("The lack of engagement during the conversation leaves your teammate uneasy, they decide to look elsewhere for help solving their problem",
+                "Start Over",
+                "Start Over",
+                "endGame");
+            }
+            break;
+        case "later":
+            if (buttonID == 'top')
+            {
+                updateGame("The teammate begins discussing what's on their mind. <br> If multiple topics are identified, help narrow down the focus of the conversation (Projects, people, patterns) <br> The teammate begins to identify some of their challenges, but it seems like they are identifying symptoms and not a root cause",
+                "You stay focused on the original topic, unsure if solving it will help with their overall challenge",
+                "You ask the employee 'and what else'",
+                "awe");
+            }
+            else
+            {
+                updateGame("Exploring the existing topics was not the purpose of the teammates original request for help",
+                "Recognizing the lack of connection, you ask the employee 'what's on your mind'",
+                "You stay the course",
+                "later2");
+            }
+        case "later2":
+        if (buttonID == 'top')
+            {
+                updateGame("The teammate begins to identify some of their challenges, but it seems like they are identifying symptoms and not a root cause",
+                "You stay focused on the original topic, unsure if solving it will help with their overall challenge",
+                "You ask the employee 'and what else'",
+                "awe");
+            }
+            else
+            {
+                updateGame("The lack of shared understanding during the conversation leaves your teammate uneasy, they decide to look elsewhere for help solving their problem",
+                "Start Over",
+                "Start Over",
+                "endGame");
+            }
+            break;
+            
+        case "awe":
+            break;
+        default:
+        
+            updateGame("The journey starts with you in your office, one of your teammates stops by and asks you for help solving a personal/professional challenge. <br>You are currently very busy.",
+            "Tell the employee exactly how to solve their problem",
+            "You see an opportuntity to help your teammate solve their own problem",
+            "start");
+    }
+  
+  }
+
+function updateGame(gameText, upper, lower, state) {
+    document.getElementById("textInput").innerHTML = gameText;
+    document.getElementById("gameTable").rows[0].cells.item(0).innerHTML = "1) ".concat(upper);
+    document.getElementById("gameTable").rows[1].cells.item(0).innerHTML  = "2) ".concat(lower);
+    document.getElementById("currentState").value = state;
+    }
+
+</script>
+
+
+</body>
+</html>
