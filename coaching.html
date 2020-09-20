@@ -28,13 +28,13 @@
 
 <!--<button id="topButton" onclick="nextStep('top')" type="button"></button>-->
 
-<h2> Debug </h2>
-<input type="text" id="currentState" value="start">
+
+<input type="hidden" id="currentState" value="start">
 <br>
-<input type="text" id="numLoops" value="0">
+<input type="hidden" id="numLoops" value="0">
 <br>
-<input type="text" id="bottomID" value="0">
-<p id="debug"> </p>
+<input type="hidden" id="bottomID" value="0">
+<!-- <p id="debug"> </p> -->
 </form>
 
 <script>
@@ -239,7 +239,9 @@ function updateGame(gameText, upper, lower, state) {
     document.getElementById("gameTable").rows[0].cells.item(0).innerHTML = "1) ".concat(upper);
     document.getElementById("gameTable").rows[1].cells.item(0).innerHTML  = "2) ".concat(lower);
     document.getElementById("currentState").value = state;
-	document.getElementById("debug").innerHTML = document.getElementById("debug").innerHTML.concat("<br>", state);
+	
+	// Debug only code for troubleshooting the state machine
+	// document.getElementById("debug").innerHTML = document.getElementById("debug").innerHTML.concat("<br>", state);
 	
     }
 
